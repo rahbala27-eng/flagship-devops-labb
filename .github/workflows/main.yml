@@ -1,0 +1,24 @@
+
+name: Flagship DevOps CI/CD
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  flagship-pipeline:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build
+        run: echo "Building Flagship application"
+
+      - name: Test
+        run: echo "Testing Flagship application"
+
+      - name: Deploy to Development
+        run: echo "Simulating Development deployment"
