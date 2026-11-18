@@ -14,11 +14,23 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Build
-        run: echo "Building Flagship application"
+      - name: Set up Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
 
-      - name: Test
-        run: echo "Testing Flagship application"
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Build and Test
+        run: gradle clean build
+
+      - name: Upload JAR artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: flagship-jar
+          path: build/libs/*.jar
 
       - name: Deploy to Development
-        run: echo "Simulating Development deployment"
+        run: echo "Development deployment not configured yet"
