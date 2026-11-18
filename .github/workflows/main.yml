@@ -46,4 +46,6 @@ jobs:
           docker logs flagship-test
           docker ps -a
           docker inspect -f '{{.State.Running}}' flagship-test | grep true
+          echo "Testing application HTTP endpoint"
+          curl --fail --retry 5 --retry-delay 3 --retry-connrefused http://localhost:8080/
 
