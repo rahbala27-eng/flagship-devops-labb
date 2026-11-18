@@ -32,5 +32,18 @@ jobs:
           name: flagship-jar
           path: build/libs/*.jar
 
-      - name: Deploy to Development
-        run: echo "Development deployment not configured yet"
+      
+      - name: Build Docker image
+        run: docker build -t flagship-app:1.0 .
+
+      - name: Check Docker image
+        run: docker image inspect flagship-app:1.0
+
+      - name: Run Docker container
+        run: |
+          docker run -d --name flagship-test -p 8080:8080 flagship-app:1.0
+          sleep 20
+          docker logs flagship-test
+          docker ps -a
+          docker inspect -f '{{.State.Running}}' flagship-test | grep true
+
